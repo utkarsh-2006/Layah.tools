@@ -313,6 +313,10 @@ img, video {
   height: 1.25rem;
 }
 
+.h-8 {
+  height: 2rem;
+}
+
 .min-h-\[120px\] {
   min-height: 120px;
 }
@@ -624,6 +628,10 @@ img, video {
   letter-spacing: .1em;
 }
 
+.tracking-wide {
+  letter-spacing: .025em;
+}
+
 .text-blue-100 {
   --tw-text-opacity: 1;
   color: rgb(219 234 254 / var(--tw-text-opacity, 1));
@@ -652,6 +660,10 @@ img, video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.text-blue-200\/90 {
+  color: #bfdbfee6;
 }
 
 .opacity-50 {

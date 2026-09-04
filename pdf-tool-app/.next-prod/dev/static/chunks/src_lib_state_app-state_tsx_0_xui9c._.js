@@ -17,11 +17,36 @@ var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.sign
 const AppContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createContext"])(undefined);
 function AppProvider({ children }) {
     _s();
-    const [isWorkspaceActive, setWorkspaceActive] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [isWorkspaceActive, setWorkspaceActiveInternal] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [activeFormat, setActiveFormat] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("pdf");
     const [activeCapabilityId, setActiveCapabilityId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [selectedFiles, setSelectedFiles] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
     const [commandInput, setCommandInput] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "AppProvider.useEffect": ()=>{
+            // Check initial hash
+            if (window.location.hash === "#workspace") {
+                setWorkspaceActiveInternal(true);
+            }
+            const handlePopState = {
+                "AppProvider.useEffect.handlePopState": ()=>{
+                    setWorkspaceActiveInternal(window.location.hash === "#workspace");
+                }
+            }["AppProvider.useEffect.handlePopState"];
+            window.addEventListener("popstate", handlePopState);
+            return ({
+                "AppProvider.useEffect": ()=>window.removeEventListener("popstate", handlePopState)
+            })["AppProvider.useEffect"];
+        }
+    }["AppProvider.useEffect"], []);
+    const setWorkspaceActive = (active)=>{
+        setWorkspaceActiveInternal(active);
+        if (active && window.location.hash !== "#workspace") {
+            window.history.pushState(null, "", "#workspace");
+        } else if (!active && window.location.hash === "#workspace") {
+            window.history.pushState(null, "", window.location.pathname + window.location.search);
+        }
+    };
     const value = {
         isWorkspaceActive,
         activeFormat,
@@ -39,11 +64,11 @@ function AppProvider({ children }) {
         children: children
     }, void 0, false, {
         fileName: "[project]/src/lib/state/app-state.tsx",
-        lineNumber: 45,
+        lineNumber: 68,
         columnNumber: 10
     }, this);
 }
-_s(AppProvider, "5pxeI4GaWZRvzJQW0rWh9nRrD5U=");
+_s(AppProvider, "RFzLeS/e1DYEvOjFWTVQjrHE0uE=");
 _c = AppProvider;
 function useApp() {
     _s1();
